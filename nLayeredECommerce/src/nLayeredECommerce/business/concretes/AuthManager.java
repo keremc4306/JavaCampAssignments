@@ -23,6 +23,11 @@ public class AuthManager implements AuthService {
 	public void register(User user) {
 		boolean checkMail = MailRegex.emailControl(user.getEmail());
 		boolean userExists = userService.getByEmail(user.getEmail().toLowerCase(Locale.ROOT));
+		
+		if (user.getPassword().length() < 6) {
+			System.out.println("Parola en az 6 karakterden oluþmalýdýr.");
+			return;
+		}
 
 		if (!checkMail) {
 			System.out.println("Geçersiz format! Lütfen email adresinizi kontrol edin");
