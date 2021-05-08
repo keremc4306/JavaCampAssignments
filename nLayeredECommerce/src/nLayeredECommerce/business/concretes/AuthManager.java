@@ -16,6 +16,12 @@ public class AuthManager implements AuthService {
 
 	@Override
 	public void login(User user) {
+		if (!user.checkActivationCode()) {
+			System.out.println("Giriþ iþlemi baþarýsýz");
+			System.out.println("Aktivasyon kodunu onaylamadan giriþ yapamazsýnýz");
+			return;
+		}
+		
 		System.out.println("Giriþ iþlemi yapýldý");
 	}
 
@@ -24,15 +30,18 @@ public class AuthManager implements AuthService {
 		boolean validationResult = RegisterValidation.checkValidate(user);
 		if (!validationResult)
 			return;
-		
+
 		boolean userExists = userService.getByEmail(user.getEmail().toLowerCase(Locale.ROOT));
-		
-		if (userExists){
-            System.out.println("Bu email adresi mevcut lütfen farklý bir adresle deneyin");
-            return;
-        }
-		
+
+		if (userExists) {
+			System.out.println("Bu email adresi mevcut lütfen farklý bir adresle deneyin");
+			return;
+		}
+
 		userService.add(user);
-        System.out.println("Kayýt iþlemi baþarýlý");
+		System.out.println("Kayýt iþlemi baþarýlý");
+		
+		user.setActivateCode("MKC267");
+        System.out.println("Doðrulama maili gönderildi, E-Postanýzý kontrol edin");
 	}
 }

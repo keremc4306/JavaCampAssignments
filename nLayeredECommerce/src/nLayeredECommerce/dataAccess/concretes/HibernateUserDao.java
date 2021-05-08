@@ -10,7 +10,7 @@ public class HibernateUserDao implements UserDao {
 
 	@Override
 	public List<User> getAll() {
-		User user = new User(1, "Kerem", "Candangil", "keremc4306@gmail.com", "423145");
+		User user = new User(1, "Kerem", "Candangil", "kerem@mkerem.com", "423145");
 		List<User> users = new ArrayList<User>();
 		users.add(user);
 		
