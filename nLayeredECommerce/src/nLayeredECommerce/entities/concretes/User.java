@@ -8,14 +8,11 @@ public class User implements Entity {
 	private String lastName;
 	private String email;
 	private String password;
-	private String activateCode;
-	private String confirmActivationCode;
-
-	public User() {
-
-	}
-
-	public User(int id, String firstName, String lastName, String email, String password) {
+	private String activateCode; // 1. aþama activation code set ediliyor
+    private String confirmActivationCode; // 2. aþama bu kýsým kontrol ediliyor
+    
+    public User(int id, String firstName, String lastName, String email, String password) {
+		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -63,25 +60,20 @@ public class User implements Entity {
 		this.password = password;
 	}
 
+	public String getActivateCode() {
+		return activateCode;
+	}
+
 	public void setActivateCode(String activateCode) {
 		this.activateCode = activateCode;
 	}
 
+	public String getConfirmActivationCode() {
+		return confirmActivationCode;
+	}
+
 	public void setConfirmActivationCode(String confirmActivationCode) {
-		boolean result = this.activateCode.equals(confirmActivationCode);
-		if (!result) {
-			System.out.println("Girilen kod doðru deðil, iþlem baþarýsýz");
-			return;
-		}
-
 		this.confirmActivationCode = confirmActivationCode;
-		System.out.println("Active etme iþlemi baþarýlý");
-	}
-
-	public boolean checkActivationCode() {
-		if (!(this.activateCode == null))
-			return this.activateCode.equals(this.confirmActivationCode);
-
-		return false;
-	}
+	}    
+    
 }
